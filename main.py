@@ -2,19 +2,12 @@
 import runpy
 import os
 import codecs
-import ctypes, sys
+import sys
 from os.path import expanduser
 
-def is_admin():
-    try:
-        return ctypes.windll.shell32.IsUserAnAdmin()
-    except:
-        return False
-
-
 if __name__ == '__main__':
-    # HERE BEGINS THE SECTION WHERE WE RUN NAMEBENCH
 
+    # HERE BEGINS THE SECTION WHERE WE RUN NAMEBENCH
     sys.argv = ['', '-x']
     runpy.run_path('./namebench.py', run_name='__main__')
 
