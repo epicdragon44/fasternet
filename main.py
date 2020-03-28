@@ -59,27 +59,23 @@ if __name__ == '__main__':
     secondServerIP = secondServerIP[:index2]
 
     # PLEASE READ: primaryServerIP and secondaryServerIP are the IP addresses only
-    print primaryServerIP
-    print secondServerIP
+    print (primaryServerIP)
+    print (secondServerIP)
 
     # HERE BEGINS THE SECTION WHERE WE IMPLEMENT THE NEW DNS SERVERS USING POWERSHELL
 
     # Ethernet
-    cmdCommand = "Set-DNSClientServerAddress \"Ethernet\" –ServerAddresses (\""
-    cmdCommand+=primaryServerIP
-    cmdCommand+="\", \""
-    cmdCommand+=secondServerIP
-    cmdCommand+="\")"
-    process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
-    output, error = process.communicate()
+    cmdCommand1 = "Set-DNSClientServerAddress \"Ethernet\" –ServerAddresses (\""
+    cmdCommand1+=primaryServerIP
+    cmdCommand1+="\", \""
+    cmdCommand1+=secondServerIP
+    cmdCommand1+="\")"
+    os.system(cmdCommand1)
 
     #Wi-Fi
-    cmdCommand = "Set-DNSClientServerAddress \"Wi-Fi\" –ServerAddresses (\""
-    cmdCommand += primaryServerIP
-    cmdCommand += "\", \""
-    cmdCommand += secondServerIP
-    cmdCommand += "\")"
-    process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
-    output, error = process.communicate()
-
-    print output
+    cmdCommand2 = "Set-DNSClientServerAddress \"Wi-Fi\" –ServerAddresses (\""
+    cmdCommand2+= primaryServerIP
+    cmdCommand2 += "\", \""
+    cmdCommand2 += secondServerIP
+    cmdCommand2 += "\")"
+    os.system(cmdCommand2)
