@@ -63,18 +63,35 @@ if __name__ == '__main__':
 
     # HERE BEGINS THE SECTION WHERE WE IMPLEMENT THE NEW DNS SERVERS USING POWERSHELL
 
+    f = open("scripttemplate.txt", "r")
+    if f.mode == 'r':
+        contents = f.read()
+        f2 = open("script.ps1", "w")
+        f2.write(contents)
+        f2.close()
+    f.close()
+
+    f2 = open("script.ps1", "a+")
+
     # Ethernet
-    cmdCommand1 = "powershell.exe Set-DNSClientServerAddress \"Ethernet\" –ServerAddresses (\""
+    cmdCommand1 = "\nSet-DNSClientServerAddress \"Ethernet\" –ServerAddresses (\""
     cmdCommand1 += primaryServerIP
     cmdCommand1 += "\", \""
     cmdCommand1 += secondServerIP
     cmdCommand1 += "\")"
-    os.system(cmdCommand1)
+    #os.system(cmdCommand1)
+    f2.write(cmdCommand1)
 
     # Wi-Fi
-    cmdCommand2 = "powershell.exe Set-DNSClientServerAddress \"Wi-Fi\" –ServerAddresses (\""
+    cmdCommand2 = "\nSet-DNSClientServerAddress \"Wi-Fi\" –ServerAddresses (\""
     cmdCommand2 += primaryServerIP
     cmdCommand2 += "\", \""
     cmdCommand2 += secondServerIP
     cmdCommand2 += "\")"
-    os.system(cmdCommand2)
+    #os.system(cmdCommand2)
+    f2.write(cmdCommand2)
+
+    f2.close()
+
+    cmdCommand3 = "powershell.exe powershell -executionpolicy bypass -File .\script.ps1"
+    os.system(cmdCommand3)
