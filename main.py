@@ -3,6 +3,7 @@ import sys
 import os
 import codecs
 from os.path import expanduser
+import subprocess
 
 if __name__ == '__main__':
     # HERE BEGINS THE SECTION WHERE WE RUN NAMEBENCH
@@ -61,4 +62,24 @@ if __name__ == '__main__':
     print secondServerIP
 
     # HERE BEGINS THE SECTION WHERE WE IMPLEMENT THE NEW DNS SERVERS USING POWERSHELL
+
+    # Ethernet
+    cmdCommand = "Set-DNSClientServerAddress \"Ethernet\" –ServerAddresses (\""
+    cmdCommand+=primaryServerIP
+    cmdCommand+="\", \""
+    cmdCommand+=secondServerIP
+    cmdCommand+="\")"
+    process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
+    output, error = process.communicate()
+
+    #Wi-Fi
+    cmdCommand = "Set-DNSClientServerAddress \"Wi-Fi\" –ServerAddresses (\""
+    cmdCommand += primaryServerIP
+    cmdCommand += "\", \""
+    cmdCommand += secondServerIP
+    cmdCommand += "\")"
+    process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
+    output, error = process.communicate()
+
+    print output
 
