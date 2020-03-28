@@ -1,3 +1,4 @@
+# coding=utf-8
 import runpy
 import sys
 import os
@@ -82,4 +83,3 @@ if __name__ == '__main__':
     output, error = process.communicate()
 
     print output
-
