@@ -9,6 +9,10 @@ def run():
 
     labelText1.set("Running...")
 
+    th.join()
+
+    labelText1.set("Done!")
+
 def threadFunc():
     runpy.run_path('./run.py', run_name='__main__')
 
