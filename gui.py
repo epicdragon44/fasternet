@@ -1,10 +1,19 @@
 import runpy
+import threading
 from Tkinter import *
-import tkinter.messagebox
 
 def run():
+
+    th = threading.Thread(target=threadFunc)
+    th.start()
+
     labelText1.set("Running...")
+
+def threadFunc():
     runpy.run_path('./run.py', run_name='__main__')
+
+def setDone():
+    labelText1.set("Done!")
 
 app = Tk()
 app.title("Fasternet")
