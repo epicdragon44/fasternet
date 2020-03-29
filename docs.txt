@@ -1,0 +1,6 @@
+DOCUMENTATION
+
+FOR BUILDING:
+Use "Make SFX
+Use this config:
+https://scontent.xx.fbcdn.net/v/t1.15752-9/90851702_524464631816734_573069948637675520_n.png?_nc_cat=101&_nc_sid=b96e70&_nc_ohc=5FooJs1eIHIAX922JEK&_nc_ad=z-m&_nc_cid=0&_nc_zor=9&_nc_ht=scontent.xx&oh=2c52f952a48db7a09b83f09c87bc45b1&oe=5EA6BACB
