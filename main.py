@@ -5,7 +5,17 @@ import codecs
 import sys
 from os.path import expanduser
 
-if __name__ == '__main__':
+import ctypes
+
+def is_admin():
+    try:
+        return ctypes.windll.shell32.IsUserAnAdmin()
+    except:
+        return False
+
+
+
+if is_admin():
 
     # HERE BEGINS THE SECTION WHERE WE RUN NAMEBENCH
     sys.argv = ['', '-x']
@@ -32,7 +42,7 @@ if __name__ == '__main__':
     # line with all the server names and IP
     primaryServer = ""
     secondServer = ""
-    thirdServer = ""
+
 
     f = codecs.open(fileUsed, 'r')
     lines = f.readlines()
@@ -45,13 +55,13 @@ if __name__ == '__main__':
             secondServer = lines[i + 1]
 
     # parses substrings for IP address only
-    primaryServerIP = ""
+    primaryServerIP = ''
     index1 = primaryServer.find('ip') + 4
     primaryServerIP = primaryServer[index1:]
     index2 = primaryServerIP.find('</div>')
     primaryServerIP = primaryServerIP[:index2]
 
-    secondServerIP = ""
+    secondServerIP = ''
     index1 = secondServer.find('ip') + 4
     secondServerIP = secondServer[index1:]
     index2 = secondServerIP.find('</div>')
@@ -62,19 +72,19 @@ if __name__ == '__main__':
     print (secondServerIP)
 
     # HERE BEGINS THE SECTION WHERE WE IMPLEMENT THE NEW DNS SERVERS USING POWERSHELL
-
-    # Ethernet
-    cmdCommand1 = "powershell.exe Set-DNSClientServerAddress \"Ethernet\" –ServerAddresses (\""
+        # Ethernet
+    cmdCommand1 = 'powershell.exe Set-DnsClientServerAddress \"Ethernet\" -ServerAddresses '
     cmdCommand1 += primaryServerIP
-    cmdCommand1 += "\", \""
+    cmdCommand1 += ', '
     cmdCommand1 += secondServerIP
-    cmdCommand1 += "\")"
     os.system(cmdCommand1)
 
     # Wi-Fi
-    cmdCommand2 = "powershell.exe Set-DNSClientServerAddress \"Wi-Fi\" –ServerAddresses (\""
+    cmdCommand2 = 'powershell.exe Set-DnsClientServerAddress \"Wi-Fi\" -ServerAddresses '
     cmdCommand2 += primaryServerIP
-    cmdCommand2 += "\", \""
+    cmdCommand2 += ', '
     cmdCommand2 += secondServerIP
-    cmdCommand2 += "\")"
     os.system(cmdCommand2)
+else:
+    # Re-run the program with admin rights
+    ctypes.windll.shell32.ShellExecuteW(None, u"runas", unicode(sys.executable), unicode(" ".join(sys.argv)), None,1)
