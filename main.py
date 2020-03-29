@@ -18,8 +18,8 @@ def is_admin():
 if is_admin():
 
     # # HERE BEGINS THE SECTION WHERE WE RUN NAMEBENCH
-    # sys.argv = ['', '-x']
-    # runpy.run_path('./namebench.py', run_name='__main__')
+    sys.argv = ['', '-x']
+    runpy.run_path('./namebench.py', run_name='__main__')
 
     # HERE BEGINS THE SECTION WHERE WE PARSE THE HTML TO GET THE ADDRESSES
 
