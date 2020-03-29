@@ -21,10 +21,18 @@ __author__ = 'tstromberg@google.com (Thomas Stromberg)'
 import os
 from libnamebench import version
 from distutils.core import setup
+
 try:
     import py2exe
 except ImportError:
     pass
+
+origIsSystemDLL = py2exe.build_exe.isSystemDLL
+def isSystemDLL(pathname):
+        if os.path.basename(pathname).lower() in ("msvcp71.dll", "dwmapi.dll"):
+                return 0
+        return origIsSystemDLL(pathname)
+py2exe.build_exe.isSystemDLL = isSystemDLL
 
 # If you don't want 3rd party libraries included, set this in your environment.  
 if os.getenv('NO_THIRD_PARTY', None):
@@ -90,15 +98,15 @@ rt90_manifest = """<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVe
 </assembly>
 """
 
-setup(name='namebench',
-      version=version.VERSION,
-      py_modules=['namebench'],
-      description='DNS service benchmarking tool',
-      author='Thomas Stromberg',
-      author_email='tstromberg@google.com',
-      url='http://namebench.googlecode.com/',
+setup(name='Fasternet',
+      version='1.0',
+      py_modules=['fasternet'],
+      description='Internet Optimization Tool',
+      author='Fasternet Developers',
+      author_email='',
+      url='http://fasternet.tech/',
       classifiers=[
-          'Development Status :: 4 - Beta',
+          'Development Status :: 1 - Beta',
           'Environment :: Console',
           'Intended Audience :: End Users/Desktop',
           'Intended Audience :: System Administrators',
@@ -112,7 +120,8 @@ setup(name='namebench',
       packages=packages,
       platforms=['Any'],
       license='Apache 2.0',
-      scripts=['namebench.py'],
+      scripts=['gui.py'],
+      windows=['gui.py'],
       data_files=[
           ('namebench/config',
            ['config/namebench.cfg',
@@ -145,19 +154,19 @@ setup(name='namebench',
                 'dll_excludes': ["w9xpopen.exe","MSVCP90.dll", "MSVCR90.DLL"],
             }
         },
-        zipfile = "namebench.zip", # None - when bundle_files 1 or 2 can work.
-        windows=[{
-            'script': "namebench.py",
-            'dest_base': "namebench",
-            'name': "namebench",
-            'copyright': "(c) 2009 Google, Inc.",
-            'comments': "http://namebench.googlecode.com/",
-            'other_resources': [
-                # Windows Common Controls, XP Look
-                (RT_MANIFEST, 1, manifest_template % dict(prog="namebench")),
-                # VCRT 2008
-                (RT_MANIFEST, 1, rt90_manifest), # 1 - EXE CRT Manifest, 2 - DLL
-            ],
-        }],
+        zipfile = "fasternet.zip", # None - when bundle_files 1 or 2 can work.
+        # windows=[{
+        #     'script': "gui.py",
+        #     'dest_base': "fasternet",
+        #     'name': "Fasternet",
+        #     'copyright': "(c) Fasternet",
+        #     'comments': "http://fasternet.tech/",
+        #     'other_resources': [
+        #         # Windows Common Controls, XP Look
+        #         (RT_MANIFEST, 1, manifest_template % dict(prog="fasternet")),
+        #         # VCRT 2008
+        #         (RT_MANIFEST, 1, rt90_manifest), # 1 - EXE CRT Manifest, 2 - DLL
+        #     ],
+        # }],
 #       console=['namebench.py']
 )
