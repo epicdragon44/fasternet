@@ -17,7 +17,7 @@ def is_admin():
 
 if is_admin():
 
-    # # HERE BEGINS THE SECTION WHERE WE RUN NAMEBENCH
+    # HERE BEGINS THE SECTION WHERE WE RUN NAMEBENCH
     sys.argv = ['', '-x']
     runpy.run_path('./namebench.py', run_name='__main__')
 
