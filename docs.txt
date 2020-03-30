@@ -2,5 +2,14 @@ DOCUMENTATION
 
 FOR BUILDING:
 Use "Make SFX
-Use this config:
-https://scontent.xx.fbcdn.net/v/t1.15752-9/90851702_524464631816734_573069948637675520_n.png?_nc_cat=101&_nc_sid=b96e70&_nc_ohc=5FooJs1eIHIAX922JEK&_nc_ad=z-m&_nc_cid=0&_nc_zor=9&_nc_ht=scontent.xx&oh=2c52f952a48db7a09b83f09c87bc45b1&oe=5EA6BACB
+	use script.bat under "Extract files into specified folder and launch executable file"
+	Extraction folder should be TEMP
+	Run as Admin under UAC auto elev
+	Auto overwrite all files under Overwrite Mode
+	Do not delete extracted files under How to delete
+	Working directory should be the default Extraction Folder
+
+TOTAL STEPS:
+With the above steps, we've built Fasternet.exe in this folder
+1) Copy it over to the pythonbundled folder and follow doc.txt in there
+2) Copy the output from pythonbundled into Inno2 and follow doc.txt in there
